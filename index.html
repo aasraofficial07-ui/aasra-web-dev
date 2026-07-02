@@ -64,6 +64,10 @@
 }
 </script>
 
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676933615151907"
+     crossorigin="anonymous"></script>
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -439,6 +443,70 @@ section {
 .service-desc {
   font-size:14px; color: var(--gray); line-height:1.6;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   WEB APPS (DETAIL)
+═══════════════════════════════════════════════════════════════════ */
+#webapps {
+  background: linear-gradient(180deg, transparent, rgba(155,93,229,0.04), transparent);
+  max-width:100%; padding:120px 60px;
+}
+#webapps > * { max-width:1300px; margin:0 auto; }
+
+.webapps-tag-row {
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:48px;
+}
+.webapps-tag {
+  font-family: var(--font-ui);
+  font-size:12px; font-weight:600; color: var(--gray);
+  border:1px solid var(--border); background: rgba(255,255,255,0.03);
+  padding:6px 14px; border-radius:100px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SOCIAL MEDIA POST DESIGN
+═══════════════════════════════════════════════════════════════════ */
+#socialdesign {
+  max-width:100%; padding:120px 60px;
+}
+#socialdesign > * { max-width:1300px; margin:0 auto; }
+
+.smm-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+  gap:24px; margin-bottom:64px;
+}
+.smm-post {
+  background: var(--surface2); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.smm-post:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.35);
+  border-color: rgba(155,93,229,0.25);
+}
+.smm-post-header {
+  display:flex; align-items:center; gap:10px; padding:12px 14px;
+}
+.smm-post-avatar {
+  width:26px; height:26px; border-radius:50%; flex-shrink:0;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+}
+.smm-post-user { font-family: var(--font-ui); font-size:12px; font-weight:700; color: var(--white); }
+.smm-post-dots { margin-left:auto; color: var(--gray); font-size:14px; letter-spacing:1px; }
+.smm-post-img {
+  aspect-ratio: 1 / 1;
+  display:flex; align-items:center; justify-content:center;
+  font-size:52px;
+}
+.smm-post-footer { padding:12px 14px 16px; }
+.smm-post-icons { display:flex; gap:14px; margin-bottom:8px; font-size:16px; color: var(--gray); }
+.smm-post-tag {
+  display:block; font-family: var(--font-ui);
+  font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  color: var(--cyan); margin-bottom:4px;
+}
+.smm-post-caption { font-size:12px; color: var(--gray); line-height:1.5; }
 
 /* ═══════════════════════════════════════════════════════════════════
    WHY US
@@ -974,8 +1042,48 @@ footer {
 /* ═══════════════════════════════════════════════════════════════════
    MOBILE
 ═══════════════════════════════════════════════════════════════════ */
-#hamburger { display:none; background:none; border:none; cursor:pointer; }
+#hamburger { display:none; background:none; border:none; cursor:pointer; z-index:950; position:relative; padding:6px; }
 #hamburger span { display:block; width:24px; height:1.5px; background:var(--white); margin:5px 0; transition: all .3s; }
+#hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+#hamburger.active span:nth-child(2) { opacity:0; }
+#hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+#mobile-menu {
+  position: fixed; top:0; right:0; height:100vh; width:min(78vw, 320px);
+  z-index:940;
+  background: rgba(8,8,14,0.98);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-left: 1px solid var(--border);
+  display:flex; flex-direction:column;
+  padding: 100px 32px 40px;
+  gap: 4px;
+  transform: translateX(100%);
+  transition: transform .35s ease;
+}
+#mobile-menu.open { transform: translateX(0); }
+
+#mobile-menu-overlay {
+  position: fixed; inset:0; z-index:930;
+  background: rgba(0,0,0,0.5);
+  opacity:0; pointer-events:none;
+  transition: opacity .3s ease;
+}
+#mobile-menu-overlay.open { opacity:1; pointer-events:auto; }
+
+#mobile-menu a {
+  font-family: var(--font-ui);
+  font-size: 16px; font-weight:600; color: var(--white);
+  text-decoration:none; padding:14px 4px;
+  border-bottom: 1px solid var(--border);
+  transition: color .2s, padding-left .2s;
+}
+#mobile-menu a:hover { color: var(--cyan); padding-left:8px; }
+
+#mobile-menu .nav-cta {
+  margin-top:20px; text-align:center;
+}
+
+body.menu-open { overflow: hidden; }
 
 @media (max-width:1024px) {
   nav { padding:16px 24px; }
@@ -984,6 +1092,9 @@ footer {
   #hamburger { display:block; }
   section { padding:80px 24px; }
   #hero { padding:100px 24px 60px; }
+  #services, #webapps, #socialdesign, #portfolio, #connect { padding:80px 24px; }
+  .smm-grid { grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:14px; }
+  .webapps-tag-row { gap:6px; }
   .hero-stats { gap:32px; }
   #why { grid-template-columns:1fr; }
   .why-visual { height:300px; }
@@ -1041,18 +1152,34 @@ footer {
   <a class="nav-logo" href="#"><span>Aasra Web Devs</span></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#webapps">Web Apps</a></li>
+    <li><a href="#socialdesign">Social Media</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#process">Process</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#pricing">Website Pricing</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="#contact">Start a Project</a>
-  <button id="hamburger" aria-label="Menu">
+  <button id="hamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<div id="mobile-menu-overlay"></div>
+<div id="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#webapps">Web Apps</a>
+  <a href="#socialdesign">Social Media</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#process">Process</a>
+  <a href="#pricing">Website Pricing</a>
+  <a href="#why">About</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contact">Contact</a>
+  <a class="nav-cta" href="#contact">Start a Project</a>
+</div>
 
 <!-- ══════════════ HERO ══════════════ -->
 <div id="hero">
@@ -1128,6 +1255,83 @@ footer {
   </div>
 </div>
 
+<!-- ══════════════ WEB APPS (DETAIL) ══════════════ -->
+<div id="webapps">
+  <div class="reveal">
+    <div class="section-label">Web Applications</div>
+    <h2 class="section-title">Powerful <span class="grad">Web Apps</span><br>Built to Scale</h2>
+    <p class="section-sub">From internal tools to full SaaS products — we design and build custom web applications with clean architecture, secure logins, and dashboards that make your data actually useful.</p>
+    <div class="webapps-tag-row">
+      <span class="webapps-tag">React / Next.js</span>
+      <span class="webapps-tag">Node.js</span>
+      <span class="webapps-tag">PostgreSQL / MongoDB</span>
+      <span class="webapps-tag">REST & GraphQL APIs</span>
+      <span class="webapps-tag">AWS / Vercel</span>
+      <span class="webapps-tag">Stripe / Razorpay</span>
+    </div>
+  </div>
+
+  <div class="services-grid reveal" style="margin-bottom:64px;">
+    <div class="service-card"><span class="service-icon">🔐</span><div class="service-name">Secure Authentication</div><div class="service-desc">Role-based logins, JWT/session auth, and Google/OAuth sign-in built in from day one.</div></div>
+    <div class="service-card"><span class="service-icon">📊</span><div class="service-name">Admin Dashboards</div><div class="service-desc">Real-time analytics, charts, and controls so you can manage your business at a glance.</div></div>
+    <div class="service-card"><span class="service-icon">🗄️</span><div class="service-name">Database & APIs</div><div class="service-desc">Robust, well-structured backends with clean REST or GraphQL APIs that scale with you.</div></div>
+    <div class="service-card"><span class="service-icon">⚙️</span><div class="service-name">Custom Workflows</div><div class="service-desc">Automations and business logic tailored exactly to how your team actually works.</div></div>
+    <div class="service-card"><span class="service-icon">☁️</span><div class="service-name">Cloud Hosting & CI/CD</div><div class="service-desc">Deployed on scalable infrastructure with automated pipelines and zero-downtime releases.</div></div>
+    <div class="service-card"><span class="service-icon">🔗</span><div class="service-name">3rd-Party Integrations</div><div class="service-desc">Payments, CRMs, email/SMS, maps, and any API your web app needs to talk to.</div></div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div class="pricing-plan">Basic Web App</div>
+      <div class="pricing-price"><sup>₹</sup>24,999</div>
+      <div class="pricing-period">one-time + 3 months free support</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Single-module app (up to 5 screens)</li>
+        <li>Admin login & dashboard</li>
+        <li>Database integration</li>
+        <li>Basic API setup</li>
+        <li>Mobile-responsive UI</li>
+        <li>Delivery in 15–20 days</li>
+      </ul>
+      <a class="pricing-cta outline" href="#contact">Get Started</a>
+    </div>
+
+    <div class="pricing-card featured reveal">
+      <div class="pricing-badge">⭐ Most Popular</div>
+      <div class="pricing-plan">Business Web App</div>
+      <div class="pricing-price"><sup>₹</sup>49,999</div>
+      <div class="pricing-period">one-time + 6 months free support</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Multi-user roles & permissions</li>
+        <li>Custom dashboard & analytics</li>
+        <li>Payment / API integrations</li>
+        <li>Full backend architecture</li>
+        <li>Priority revisions</li>
+        <li>Delivery in 3–4 weeks</li>
+      </ul>
+      <a class="pricing-cta primary" href="#contact">Get Started</a>
+    </div>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-plan">Enterprise Web App</div>
+      <div class="pricing-price"><sup>₹</sup>89,999<span style="font-size:16px;">+</span></div>
+      <div class="pricing-period">custom scope + 12 months support</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Unlimited modules & pages</li>
+        <li>Advanced integrations (CRM/ERP)</li>
+        <li>Scalable cloud architecture</li>
+        <li>Dedicated project manager</li>
+        <li>Ongoing maintenance plan</li>
+        <li>Delivery in 6–8 weeks</li>
+      </ul>
+      <a class="pricing-cta outline" href="#contact">Get Started</a>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════ WHY US ══════════════ -->
 <section id="why">
   <div class="reveal-left">
@@ -1191,10 +1395,90 @@ footer {
   </div>
 </div>
 
+<!-- ══════════════ SOCIAL MEDIA POST DESIGN ══════════════ -->
+<div id="socialdesign">
+  <div class="reveal">
+    <div class="section-label">Social Media</div>
+    <h2 class="section-title">Scroll-Stopping <span class="grad">Social Post Design</span></h2>
+    <p class="section-sub">Consistent, on-brand graphics for Instagram, Facebook & LinkedIn — feed posts, reel covers, carousels, and stories designed to boost engagement and keep your page looking premium.</p>
+  </div>
+
+  <div class="smm-grid reveal">
+    <div class="smm-post">
+      <div class="smm-post-header"><div class="smm-post-avatar"></div><div class="smm-post-user">Feed Post</div><div class="smm-post-dots">•••</div></div>
+      <div class="smm-post-img" style="background:linear-gradient(135deg,#0a0a25,#1a0a30)">🖼️</div>
+      <div class="smm-post-footer"><div class="smm-post-icons"><span>♡</span><span>💬</span><span>↗</span></div><span class="smm-post-tag">Single Post</span><div class="smm-post-caption">Product highlight or offer, on-brand colors & typography.</div></div>
+    </div>
+    <div class="smm-post">
+      <div class="smm-post-header"><div class="smm-post-avatar"></div><div class="smm-post-user">Reel Cover</div><div class="smm-post-dots">•••</div></div>
+      <div class="smm-post-img" style="background:linear-gradient(135deg,#1a0a05,#250a10)">🎬</div>
+      <div class="smm-post-footer"><div class="smm-post-icons"><span>♡</span><span>💬</span><span>↗</span></div><span class="smm-post-tag">Reel / Short</span><div class="smm-post-caption">Bold cover thumbnail designed to stop the scroll.</div></div>
+    </div>
+    <div class="smm-post">
+      <div class="smm-post-header"><div class="smm-post-avatar"></div><div class="smm-post-user">Carousel</div><div class="smm-post-dots">•••</div></div>
+      <div class="smm-post-img" style="background:linear-gradient(135deg,#050a25,#0a1520)">📚</div>
+      <div class="smm-post-footer"><div class="smm-post-icons"><span>♡</span><span>💬</span><span>↗</span></div><span class="smm-post-tag">Multi-Slide</span><div class="smm-post-caption">Tips, listicles, or before/after slides that drive saves.</div></div>
+    </div>
+    <div class="smm-post">
+      <div class="smm-post-header"><div class="smm-post-avatar"></div><div class="smm-post-user">Story</div><div class="smm-post-dots">•••</div></div>
+      <div class="smm-post-img" style="background:linear-gradient(135deg,#050f0a,#0a1f10)">📲</div>
+      <div class="smm-post-footer"><div class="smm-post-icons"><span>♡</span><span>💬</span><span>↗</span></div><span class="smm-post-tag">Story Template</span><div class="smm-post-caption">Vertical templates for announcements, polls & promos.</div></div>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div class="pricing-plan">Starter</div>
+      <div class="pricing-price"><sup>₹</sup>1,499</div>
+      <div class="pricing-period">per month</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>8 custom posts / month</li>
+        <li>On-brand templates</li>
+        <li>Instagram + Facebook sizing</li>
+        <li>1 revision per post</li>
+        <li>Delivery in 2–3 days</li>
+      </ul>
+      <a class="pricing-cta outline" href="#contact">Get Started</a>
+    </div>
+
+    <div class="pricing-card featured reveal">
+      <div class="pricing-badge">⭐ Most Popular</div>
+      <div class="pricing-plan">Growth</div>
+      <div class="pricing-price"><sup>₹</sup>2,999</div>
+      <div class="pricing-period">per month</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>16 posts + 4 reel covers</li>
+        <li>Story templates included</li>
+        <li>Content calendar planning</li>
+        <li>2 revisions per post</li>
+        <li>Delivery in 1–2 days</li>
+      </ul>
+      <a class="pricing-cta primary" href="#contact">Get Started</a>
+    </div>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-plan">Premium</div>
+      <div class="pricing-price"><sup>₹</sup>4,999</div>
+      <div class="pricing-period">per month</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>30 posts + reel covers</li>
+        <li>Carousel & story sets</li>
+        <li>Dedicated designer</li>
+        <li>Unlimited revisions</li>
+        <li>Priority 24-hr delivery</li>
+      </ul>
+      <a class="pricing-cta outline" href="#contact">Get Started</a>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════ PRICING ══════════════ -->
 <section id="pricing" class="reveal">
-  <div class="section-label">Pricing</div>
-  <h2 class="section-title">Simple, <span class="grad">Transparent Pricing</span></h2>
+  <div class="section-label">Website Pricing</div>
+  <h2 class="section-title">Simple, <span class="grad">Transparent Website Pricing</span></h2>
   <p class="section-sub">No hidden fees. No surprises. Just great work at a fair price.</p>
 
   <div class="pricing-grid">
@@ -1370,9 +1654,9 @@ footer {
       <div class="footer-col-title">Services</div>
       <ul class="footer-links">
         <li><a href="#services">Website Development</a></li>
-        <li><a href="#services">Web Applications</a></li>
+        <li><a href="#webapps">Web Applications</a></li>
+        <li><a href="#socialdesign">Social Media Design</a></li>
         <li><a href="#services">E-Commerce</a></li>
-        <li><a href="#services">Mobile Apps</a></li>
         <li><a href="#services">AI Solutions</a></li>
         <li><a href="#services">SEO</a></li>
       </ul>
@@ -1382,7 +1666,7 @@ footer {
       <ul class="footer-links">
         <li><a href="#why">About Us</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#pricing">Website Pricing</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1448,6 +1732,34 @@ document.querySelectorAll('a,button,.service-card,.project-card,.pricing-card').
   el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; cursorRing.style.width = '60px'; cursorRing.style.height = '60px'; });
   el.addEventListener('mouseleave', () => { cursor.style.width = '12px'; cursor.style.height = '12px'; cursorRing.style.width = '36px'; cursorRing.style.height = '36px'; });
 });
+
+// ══════════════════════════════════════════════════════════════
+// MOBILE MENU (hamburger)
+// ══════════════════════════════════════════════════════════════
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+function openMobileMenu() {
+  hamburger.classList.add('active');
+  hamburger.setAttribute('aria-expanded', 'true');
+  mobileMenu.classList.add('open');
+  mobileMenuOverlay.classList.add('open');
+  document.body.classList.add('menu-open');
+}
+function closeMobileMenu() {
+  hamburger.classList.remove('active');
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileMenu.classList.remove('open');
+  mobileMenuOverlay.classList.remove('open');
+  document.body.classList.remove('menu-open');
+}
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+});
+mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeMobileMenu(); });
 
 // ══════════════════════════════════════════════════════════════
 // SCROLL PROGRESS + NAV + BACK TO TOP
